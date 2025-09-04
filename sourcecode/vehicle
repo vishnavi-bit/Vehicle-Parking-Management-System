@@ -22,7 +22,6 @@ self.workbook = Workbook()
 self.sheet = self.workbook.active
 self.sheet.append(["Owner Name", "Vehicle Type", "Number Plate", "License
 Number", "Parking Time", "Removing Time", "Slot", "Cost", "GST", "Demand Factor", "Total Cost"])
-12
 # Define IST timezone using pytz
 self.india_timezone = pytz.timezone('Asia/Kolkata')
 def is_valid_number_plate(self, number_plate): """Validate vehicle number plate format (xxxx-xx-xxxx).""" pattern = r"^[A-Za-z0-9]{4}-[A-Za-z0-9]{2}-[A-Za-z0-9]{4}$"
@@ -44,7 +43,6 @@ if self.truck_slots[i] is None:
 return i
 return -1
 def get_current_time_ist(self): """Get the current IST time in the format 'YYYY-MM-DD hh:mm:ss AM/PM'."""
-13
 # Get the current time in UTC and convert it to IST using pytz
 utc_time = datetime.now(pytz.utc) # Get time in UTC
 ist_time = utc_time.astimezone(self.india_timezone) # Convert UTC time to IST# Return time formatted in 12-hour format with AM/PM
@@ -68,7 +66,6 @@ elif 50 <= used_percentage <= 75:
 demand_level = "Moderate" demand_multiplier = 1.2
 else:
 demand_level = "High" demand_multiplier = 1.5
-14
 return demand_multiplier, demand_level
 def park_vehicle(self, vehicle_type, owner_name, number_plate, license_number): """Park a vehicle in the parking lot."""
 if not self.is_valid_number_plate(number_plate):
@@ -91,7 +88,6 @@ return
 # Park the vehicle in the slot
 if vehicle_type == "car":
 self.car_slots[slot] = number_plate
-15
 elif vehicle_type == "bike":
 self.bike_slots[slot] = number_plate
 elif vehicle_type == "truck":
@@ -114,7 +110,6 @@ print(f"Slot: {slot + 1}")
 print(f"Parking Date and Time: {date_time}")
 print(f"Details saved to Excel: parking_records.xlsx\n")
 def remove_vehicle(self, number_plate):
-16
 """Remove a vehicle from the parking lot."""
 if number_plate not in self.parking_records:
 print(f"No vehicle found with number plate {number_plate}.")
@@ -143,7 +138,6 @@ elif vehicle_type == "truck":
 base_rate = 100
 self.truck_slots[slot] = None
 total_cost = base_rate * (hours_parked + remaining_minutes / 60) *
-17
 demand_multiplier
 gst = total_cost * 0.18
 total_with_gst = total_cost + gst
@@ -170,7 +164,6 @@ print(f"Details updated in Excel: parking_records.xlsx\n")
 def available_spaces(self): """Display the available parking spaces.""" car_available = self.car_space - self.car_slots.count(None)
 bike_available = self.bike_space - self.bike_slots.count(None)
 truck_available = self.truck_space - self.truck_slots.count(None)
-18
 print(f"\nAvailable spaces: ")
 print(f"Car Spaces: {car_available}/{self.car_space}")
 print(f"Bike Spaces: {bike_available}/{self.bike_space}")
@@ -195,7 +188,6 @@ print(f"License Number: {vehicle['license_number']}")
 print(f"Park Time: {vehicle['date_time']}")
 print(f"Slot: {vehicle['slot'] + 1}")
 else:
-19
 print(f"No vehicle found with number plate {number_plate}.")
 def sort_vehicles(self, sort_by): """Sort vehicles based on selected attribute."""
 if sort_by not in ['number_plate', 'owner_name', 'vehicle_type']:
@@ -221,7 +213,6 @@ print("7. Exit")
 choice = input("Enter your choice: ").strip()
 if choice == "1":
 vehicle_type = input("Enter vehicle type (car/bike/truck): ").strip().lower()
-20
 owner_name = input("Enter owner's name: ").strip()
 number_plate = input("Enter vehicle number plate (xxxx-xx-xxxx): ").strip().upper()
 license_number = input("Enter vehicle license number (e.g., DL-01-12345678): ").strip().upper()
